@@ -1,4 +1,5 @@
 from typing import Dict, List, Set, Tuple
+from remove_recursion import remove_left_recursion_for_grammar
 from seperate_variables import seperate_variables 
 
 
@@ -57,10 +58,11 @@ def compute_first(grammar: List[Tuple[str, List[str]]]) -> Dict[str, Set[str]]:
     return FIRST
 
 if __name__=="__main__":
-    grammar = [
-    ('S', ['AB', 'BC']),   # S -> AB | BC
-    ('A', ['aA', 'a']),    # A -> aA | a
-    ('B', ['bB', 'b']),    # B -> bB | b
-    ('C', ['cC', 'c'])     # C -> cC | c
-]
-    print(compute_first(grammar))
+   grammar = [
+    ("S", ["ABC"]),
+    ("A", ["abA", "ab"]),
+    ("B", ["b", "BC"]),
+    ("C", ["c", "cC"])
+    ]
+   updated_grammar = remove_left_recursion_for_grammar(grammar)
+print(compute_first(updated_grammar))
